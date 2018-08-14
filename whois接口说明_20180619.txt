@@ -1,0 +1,643 @@
+whois接口说明
+
+** 如果连接119.10.116.247上的服务器，将url中的ip地址换成119.10.116.247
+示例：
+http://119.10.116.247:8081/rest/whois/addTdk
+
+
+***********************************************************************
+
+接口为rest形式
+
+path: /rest/whois/${接口标识}
+方法：post
+消息体：json格式
+返回值：json格式
+
+
+示例
+{
+    "domainName": "aaa.com",
+    "title": "aaa",
+    "keywords": "ccc,bbb",
+    "description": "ddd"
+}
+
+**************************
+
+返回值具体说明：
+见各接口
+
+
+******************************
+
+具体接口说明
+
+示例服务器在：http://127.0.0.1:8081
+
+**********************
+
+1.tdk接口
+
+1.1.添加tdk
+接口标识：addTdk
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/addTdk
+
+
+{
+    "domainName": "xinnet.com",
+    "title": "云服务器_域名注册_虚拟主机-新网域名云服务器提供商",
+    "keywords": "箭头云服务器,云服务器,域名注册,虚拟主机,域名交易,域名,主机托管租用,企业邮箱,xinnet,xinwang,新网",
+    "description": "新网是提供云服务器,箭头云服务器,域名注册,虚拟主机,域名交易,域名购买续费,主机托管租用,企业邮箱等互联网基础应用服务提供商,新网箭头云服务器专为中小微企业成长而设计的云服务器.新网是全球TOP11域名注册商，中国注册商唯一入选。"
+}
+
+{
+    "domainName": "jd.com",
+    "title": "京东(JD.COM)-正品低价、品质保障、配送及时、轻松购物！",
+    "keywords": "网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东",
+    "description": "京东JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!"
+}
+
+{
+    "domainName": "wujun.com",
+    "title": "吴军测试",
+    "keywords": "网上购物,虚拟主机,wujun",
+    "description": "吴军测试tdk"
+}
+
+
+
+返回值：
+
+{"result": true}
+
+**********************
+
+
+1.2.获取tdk
+接口标识：findTdk
+
+调用示例：
+GET
+http://127.0.0.1:8081/rest/whois/findTdk?domainName=xinnet.com
+
+
+返回值：
+
+{
+    "domainName": "xinnet.com",
+    "title": "云服务器_域名注册_虚拟主机-新网域名云服务器提供商",
+    "keywords": "箭头云服务器,云服务器,域名注册,虚拟主机,域名交易,域名,主机托管租用,企业邮箱,xinnet,xinwang,新网",
+    "description": "新网是提供云服务器,箭头云服务器,域名注册,虚拟主机,域名交易,域名购买续费,主机托管租用,企业邮箱等互联网基础应用服务提供商,新网箭头云服务器专为中小微企业成长而设计的云服务器.新网是全球TOP11域名注册商，中国注册商唯一入选。"
+}
+*************************
+
+1.3 修改tdk
+接口标识：updateTdk
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/updateTdk
+
+只修改指定字段
+
+{
+    "domainName": "wujun.com",
+    "title": "吴军测试2",
+    "keywords": "网上购物,虚拟主机,wujun2",
+    "description": "吴军测试tdk2"
+}
+
+返回值：
+
+{"result": true}
+
+*************************
+
+1.4 添加或修改tdk，不存在时添加，存在时修改。
+接口标识：addOrUpdateTdk
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/addOrUpdateTdk
+
+修改时只修改指定字段
+
+{
+    "domainName": "wujun3.com",
+    "title": "吴军测试3",
+    "keywords": "网上购物,虚拟主机,wujun3",
+    "description": "吴军测试tdk3"
+}
+
+返回值：
+
+{"result": true}
+
+
+
+*************************
+
+
+1.5 删除tdk
+接口标识：deleteTdk
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/deleteTdk
+
+批量删除
+["wujun1.com","wujun2.com"]
+
+单个删除
+["wujun1.com"]
+
+
+返回值：
+
+{"result": true}
+
+*************************
+
+
+1.6 根据关键词获取tdk列表
+接口标识：listTdks
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/listTdks
+
+{
+"start": 0,
+"limit": 5,
+"keyword": "网上购物"
+}
+
+
+返回值：
+注：id属性是预留字段，可以忽略
+
+{
+    "count": 2,
+    "list": [
+        {
+            "id": 0,
+            "title": "京东(JD.COM)-正品低价、品质保障、配送及时、轻松购物！",
+            "keywords": "网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东",
+            "description": "京东JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!"
+        },
+        {
+            "id": 0,
+            "title": "吴军测试4",
+            "keywords": "网上购物,虚拟主机,wujun2",
+            "description": "吴军测试tdk2"
+        }
+    ]
+}
+
+*************************
+
+1.7 根据关键词随机获取指定数量的域名
+接口标识：listDomainNames
+
+调用示例：
+GET
+http://127.0.0.1:8081/rest/whois/listDomainNames?keyword=网上购物&count=5
+
+返回值：
+[ "jd.com", "wujun.com" ]
+
+*************************
+
+1.8 根据域名获取指定数量的相关域名
+接口标识：listRelatedDomainNames
+
+调用示例：
+GET
+http://127.0.0.1:8081/rest/whois/listRelatedDomainNames?domainName=xinnet.com&count=5
+
+注：返回值如果包含传入的域名，则去除
+
+返回值：
+[ "wujun.com" ]
+
+*************************
+
+1.9 根据关键词获取指定数量的相关关键词
+接口标识：listRelatedKeywords
+
+调用示例：
+GET
+http://127.0.0.1:8081/rest/whois/listRelatedKeywords?keyword=网上购物&count=5
+
+返回值：
+[ "网上商城" ]
+
+*************************
+
+2.企业接口
+
+2.company接口
+
+2.1.添加company
+接口标识：addCompany
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/addCompany
+
+{
+    "compName": "北京新网数码信息技术有限公司",
+    "compAddress": "北京大兴区地盛西路1号"
+}
+
+{
+    "compName": "浦东发展银行",
+    "compAddress": "上海浦东新区"
+}
+
+{
+    "compName": "吴军测试公司",
+    "compAddress": "aaa"
+}
+
+
+
+返回值：
+
+{"result": true}
+
+**********************
+
+
+2.2.获取company（内部接口，暂不暴露）
+接口标识：findCompany
+
+
+*************************
+
+2.3 修改company
+接口标识：updateCompany
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/updateCompany
+
+只修改指定字段
+只能修改地址
+
+{
+    "compName": "吴军测试公司",
+    "compAddress": "bbb"
+}
+
+返回值：
+
+{"result": true}
+
+*************************
+
+2.4 添加或修改company，不存在时添加，存在时修改。
+接口标识：addOrUpdateCompany
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/addOrUpdateCompany
+
+修改时只修改指定字段
+
+{
+    "compName": "吴军测试公司",
+    "compAddress": "ccc"
+}
+
+
+返回值：
+
+{"result": true}
+
+
+
+*************************
+
+
+2.5 删除company
+接口标识：deleteCompany
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/deleteCompany
+
+批量删除
+["公司1","公司2"]
+
+单个删除
+["公司1"]
+
+
+返回值：
+
+{"result": true}
+
+*************************
+
+
+2.6 根据域名匹配company列表
+接口标识：matchCompanies
+
+调用示例：
+http://127.0.0.1:8081/rest/whois/matchCompanies
+
+{
+"start": 0,
+"limit": 5,
+"domainName": "xinwang.com"
+}
+
+
+
+返回值：
+
+{
+    "count": 1,
+    "list": [
+        {
+            "compName": "北京新网数码信息技术有限公司",
+            "compAddress": "北京大兴区地盛西路1号"
+        }
+    ]
+}
+
+*************************
+
+2.7 根据企业名称获取指定数量的相关企业
+接口标识：listRelatedCompanies
+
+调用示例：
+GET
+http://127.0.0.1:8081/rest/whois/listRelatedCompanies?compName=投资公司&count=5
+
+返回值：
+[ "吴军测试公司", "北京新网数码信息技术有限公司" ]
+
+*************************
+
+
+a：获取tdk
+接口标识：getTdk
+：
+请求方式：GET
+xinnet.com 为要传入的域名
+公共参数 = innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+
+调用方法：http://119.10.116.237:7081/getTdk?domainName=xinnet.com+公共参数
+公共参数拼错则返回提示：列：{"message": "appkey不能为空"}
+
+返回值：
+
+{
+    "domainName": "xinnet.com",
+    "title": "云服务器_域名注册_虚拟主机-新网域名云服务器提供商",
+    "keywords": "箭头云服务器,云服务器,域名注册,虚拟主机,域名交易,域名,主机托管租用,企业邮箱,xinnet,xinwang,新网",
+    "description": "新网是提供云服务器,箭头云服务器,域名注册,虚拟主机,域名交易,域名购买续费,主机托管租用,企业邮箱等互联网基础应用服务提供商,新网箭头云服务器专为中小微企业成长而设计的云服务器.新网是全球TOP11域名注册商，中国注册商唯一入选。"
+}
+*************************
+
+b：获取备案信息
+接口标识：getBeian
+：
+请求方式：GET
+xinnet.com 为要传入的域名
+调用示例：
+公共参数 = innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+调用方法：http://119.10.116.237:7081/getBeian?domainName=xinnet.com+公共参数
+
+
+
+返回值
+{
+    'company_name': '北京新网数码信息技术有限公司',     #'公司名称'
+    'company_type': '企业',                        #单位性质
+    'website_recard_num': '京ICP备09061941号-4',    #备案
+    'website_homepage': xinnet.com,                #网站首页
+    'website_name': '北京新网数码信息技术有限公司',      #网站名称
+    'check_date': '2016-07-25',                    #审核时间
+    "id":""
+
+}
+
+c:获取工商信息
+接口标识：getBusiness
+请求方式：GET
+1492a6d969a99da824139efc04d7157a 这是要传入md5后的公司名称
+MD5加密方法：  @$^&)*% + 公司名称
+
+调用示例：
+公共参数 = innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+调用方法：http://119.10.116.237:7081/getBusiness?companyName=1492a6d969a99da824139efc04d7157a + 公共参数
+
+返回值
+{
+  "id": 883,
+  "company_introduce": "北京天瑞德电气设备有限公司位于北京市朝阳区北京市朝阳区望京北路９号Ｃ座４０９室交通便利。北京天瑞德电气设备有限公司本着“客户第一，诚信至上”的原则，欢迎国内外企业/公司/机构与本单位建立长期的合作关系。热诚欢迎各界朋友前来参观、考察、洽谈业务。徐荣代表北京天瑞德电气设备有限公司欢迎新老客户来电咨询。",
+  "tel": "010-64398150",
+  "contacts_people": "徐荣",
+  "m_phone": "",
+  "company_name": "北京天瑞德电气设备有限公司",
+  "status": "未知",
+  "company_type": "其他有限责任公司",
+  "establish_date": "2005年7月20日",
+  "expire_date": "2005年7月20日",
+  "register_money": "500 万元",
+  "register_authority": "朝阳分局",
+  "business_scope": "销售机械设备、五金交电、电子产品、建材、化工产品（不含危险化学品）；技术推广服务；经济贸易咨询；投资咨询；企业策划、设计；会议及展览服务；电脑图文设计、制作；设计、制作广告；货物进出口；代理进出口；技术进出口。（企业依法自主选择经营项目，开展经营活动；依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营活动。）",
+  "register_address": "北京市朝阳区望京街4号楼24层2408",
+  "legal_representative": "徐荣",
+  "register_num": "110105008652006 / 91110105777661289R",
+  "company_website": "",
+  "eid": "1492a6d969a99da824139efc04d7157a",
+  "indutry_id": 1,
+  "area_id": 1
+}
+返回参数说明：
+{
+  "id": 883,
+  "company_introduce": #公司简介
+  "tel":               #联系电话
+  "contacts_people":   #联系人
+  "m_phone": "",       #联系手机
+  "company_name":      #公司名称
+  "status":            #公司状态
+  "company_type":      #公司类型
+  "establish_date":    #审核日期
+  "expire_date":       #有效日期
+  "register_money":    #注册资金
+  "register_authority":#注册地点
+  "business_scope":    #经营范围
+  "register_address":  #注册地址
+  "legal_representative": #法人代表
+  "register_num":      #注册号
+  "company_website":   #公司网站
+  "eid":               #MD5后的标识
+  "indutry_id": 1,
+  "area_id": 1
+}
+
+工商信息数据库现有数据：测试用
+    北京知行和易科技有限公司
+    北京享悦天成机械设备租赁有限公司
+    北京众合力建筑机械销售中心
+    北京双成伟业机械设备租赁中心
+    北京普尔办公设备有限公司
+    北京百嘉长峰环境设备有限公司
+    北京诚意达制冷设备维修中心
+    北京杰瑞物流设备有限公司
+    北京坚固林机电设备有限公司
+    北京圣为行机械设备租赁中心
+    北京中驰远航居家养老服务有限公司
+    北京双海宏机电设备有限公司
+    北京亚豪博业建筑设备租赁有限公司
+    北京福七星商贸有限公司
+    北京泰利信机电设备有限公司
+    北京宏特伟业机械设备技术有限公司
+公共参数说明：
+
+innerApp：内部app标识，本系统的值为：whois
+secret：app密钥，本系统的值为：aef8f507-d1b3-4697-b6a7-6fd7d83b0ff7，仅供加密使用，不需要传输
+ts：时间戳，精确到秒（长度为13的字符串），每次生成的时间戳有效期为1小时
+sign：签名，按照下面算法进行计算：
+1）先拼接字符串："innerApp=" + innerApp + "&secret=" + secret + "&ts=" + ts
+示例：innerApp=whois&secret=aef8f507-d1b3-4697-b6a7-6fd7d83b0ff7&ts=1529647190690
+2）对上面字符串进行md5（全小写）
+
+使用方法：在原有的url的基础上，附加innerApp、ts、sign三个参数，顺序不要求，示例：
+innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+
+完整的url示例：
+http://127.0.0.1:8081/rest/whois/addTdk?innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+
+http://127.0.0.1:8081/rest/whois/findTdk?domainName=xinnet.com&innerApp=whois&ts=1529647190690&sign=4c1b18c8eaf9a55e11fdec8ba94db237
+
+******************************
+
+
+消息体示例
+{
+    "domainName": "aaa.com",
+    "title": "aaa",
+    "keywords": "ccc,bbb",
+    "description": "ddd"
+}
+
+**************************
+
+返回值具体说明：
+见各接口
+
+
+******************************
+
+具体接口说明
+
+e:获取关键字百度排名指数
+
+
+接口标识：KeymanRanking
+请求方式：GET
+
+调用示例：
+调用方法：http://119.10.116.237:7081/getKeymanRanking?keyWord=游戏 + 公共参数
+http://127.0.0.1:5003/getKeymanRanking?keyWord=游戏
+
+{
+  "keyman": "游戏",                           #关键字
+  "index": {
+    "quanwang": "2,880,338",        #全网指数
+    "baiduPc": "2909",              #百度Pc
+    "baiduMove": "17,880",          #百度移动
+    "360index": "36,785",           #360
+    "sougouPc": "1,277,296",        #搜狗Pc
+    "weixin": "1,545,468",          #微信
+    "shougouMove": "0",             #搜狗移动
+    "total": "100,000,000",         #百度搜索总收录
+    "top_domain": 16,               #顶级二级域名个数
+    "context_page": 4               #内容页
+  },
+  "ranking": [                      #这是顶级域名详情，返回个数是随着百度搜索，所以返回个数每次不确定
+    {
+      "ali213.net": "单机游戏_单机游戏下载_中国单机游戏门户_游侠网"
+    },
+    {
+      "4399.com": "小游戏,4399小游戏,小游戏大全,双人小游戏大全 - www.4399.com..."
+    },
+    {
+      "yxdown.com": "单机游戏_单机游戏下载_单机游戏下载大全中文版下载_游迅网"
+    },
+    {
+      "game.qq.com": "腾讯游戏 - 用心创造快乐"
+    },
+    {
+      "7k7k.com": "小游戏,7k7k小游戏,小游戏大全,双人小游戏 - www.7k7k.com"
+    },
+    {
+      "17173.com": "::17173.com::中国游戏第一门户站"
+    },
+    {
+      "game.163.com": "网易游戏官网_游戏热爱者"
+    },
+    {
+      "duowan.com": "多玩游戏网 | 多玩游戏 多看视频 多交朋友"
+    },
+    {
+      "gamersky.com": "游民星空 - 大型单机游戏媒体 提供极具特色单机游戏资讯、下载"
+    },
+    {
+      "pcgames.com.cn": "太平洋游戏网_竞技游戏综合门户"
+    },
+    {
+      "play.163.com": "爱玩网_网易旗下游戏新媒体_爱游戏,易起玩!"
+    },
+    {
+      "17yy.com": "免费精品小游戏大全 - 17yy经典小游戏"
+    },
+    {
+      "3dmgame.com": "单机游戏_单机游戏下载_单机游戏大全中文版下载_3DM游戏网"
+    },
+    {
+      "games.qq.com": "腾讯游戏频道—最有影响力的游戏媒体"
+    },
+    {
+      "37.com": "37游戏,玩心创造世界_37网页游戏平台"
+    },
+    {
+      "games.sina.com.cn": "新浪游戏_最新网游,手游,单机游戏资讯,排行,下载_大型中文游戏..."
+    }
+  ],
+  "top10": [                                            #这是顶级域名前10排名，返回个数是随着百度搜索，所以返回个数每次不确定
+    {
+      "ali213.net": "单机游戏_单机游戏下载_中国单机游戏门户_游侠网http://www.ali213.net/"
+    },
+    {
+      "4399.com": "小游戏,4399小游戏,小游戏大全,双人小游戏大全 - www.4399.com...http://www.4399.com/"
+    },
+    {
+      "yxdown.com": "单机游戏_单机游戏下载_单机游戏下载大全中文版下载_游迅网http://www.yxdown.com/"
+    },
+    {
+      "game.qq.com": "腾讯游戏 - 用心创造快乐http://game.qq.com/"
+    },
+    {
+      "7k7k.com": "小游戏,7k7k小游戏,小游戏大全,双人小游戏 - www.7k7k.comhttp://www.7k7k.com/"
+    },
+    {
+      "17173.com": "::17173.com::中国游戏第一门户站https://www.17173.com/"
+    },
+    {
+      "game.163.com": "网易游戏官网_游戏热爱者http://game.163.com/"
+    },
+    {
+      "duowan.com": "多玩游戏网 | 多玩游戏 多看视频 多交朋友http://www.duowan.com/"
+    },
+    {
+      "gamersky.com": "游民星空 - 大型单机游戏媒体 提供极具特色单机游戏资讯、下载https://www.gamersky.com/"
+    },
+    {
+      "pcgames.com.cn": "太平洋游戏网_竞技游戏综合门户http://www.pcgames.com.cn/"
+    }
+  ],                                            #这是关键字的百度百科
+  "baike": "游戏是所有哺乳类动物，特别是灵长类动物学习生存的第一步。它是一种基于物质需求满足之上的，在一种特定时间、空间范围内遵循某种特定规则的，追求精神需求满足的社会行为方式。img合理适度的游戏允许人类在模拟环境下挑战和克服障碍，可以帮助人类开发智力、锻炼思维和反应能力、训练技能、培养规则意识等，大型网络游戏还可以培养战略战术意识和团队精神。但凡事过犹不及，过度游戏也会对人的身心健康产生危害。2018年6月18日，世界卫生组织发布新版《国际疾病分类》，“游戏障碍”，即通常所说的游戏成瘾，被列为疾病。img游戏有智力游戏和活动性游戏之分，又翻译为Play，Pastime，Playgame，Sport，Spore，Squail，Games，Gamest，Hopscotch，Jeu，Toy。现在的游戏多指各种平台上的电子游戏。"
+}
